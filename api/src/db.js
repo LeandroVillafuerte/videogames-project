@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
+const { Sequelize , Op} = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -34,8 +34,8 @@ const { Videogame , Genre } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Videogame.belongsToMany(Genre, {through: 'videogame_genre'});
-Genre.belongsToMany(Videogame,{through:'videogame_genre'});
+Videogame.belongsToMany(Genre, {through: 'videogame_genre', timestamps:false});
+Genre.belongsToMany(Videogame,{through:'videogame_genre',timestamps:false});
 
 
 
