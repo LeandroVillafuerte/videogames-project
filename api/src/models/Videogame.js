@@ -21,9 +21,12 @@ module.exports = (sequelize) => {
       rating: {
         type: DataTypes.ARRAY(DataTypes.INTEGER),
       },
-      plataforms: {
-        type: DataTypes.STRING,
+      platforms: {
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
+      },
+      background_image:{
+        type: DataTypes.STRING
       },
       origin: {
         type: DataTypes.BOOLEAN,

@@ -14,10 +14,10 @@ router.get("/:id", async function (req, res) {
 
 
 router.post("/", async function (req, res) {
- const { name, description, release_date, rating, plataforms, genres } = req.body;
+ const { name, description, release_date, rating, platforms,background_image, genres } = req.body;
 
  const videogame = await Videogame.create({
-   name, description, release_date, rating, plataforms
+   name, description, release_date, rating, platforms,background_image
  })
  
 
