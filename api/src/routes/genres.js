@@ -3,6 +3,10 @@ const router = require("express").Router();
 const { API_KEY } = process.env;
 const axios = require("axios").default;
 
+//////////////////////////////////////End Point API//////////////////////////////////////////////
+//  https://api.rawg.io/api/genres
+
+///////////////////////////////////////Routes/////////////////////////////////////////////////
 router.get("/", async function (req, res) {
   axios
     .get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
@@ -26,7 +30,7 @@ router.get("/", async function (req, res) {
     .then((response) => {
       res.json(response);
     })
-    .catch((error) => res.status(500).statusMessage(error));
+    .catch(() => res.status(500).send("Internal Error"));
 });
 
 module.exports = router;
