@@ -9,7 +9,7 @@ module.exports =(sequelize) => {
       id: {
         type: DataTypes.STRING,
         defaultValue: function(){return Date.now()+"u"},
-        primaryKey: true
+        primaryKey: true,
       },
       name: {
         type: DataTypes.STRING,
