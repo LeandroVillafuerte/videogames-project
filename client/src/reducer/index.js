@@ -1,10 +1,11 @@
-import { FETCH_VIDEOGAMES, SEARCH_VIDEOGAMES, SORT } from "../constants/actionstypes"
+import { FETCH_GENRES, FETCH_VIDEOGAMES, SEARCH_VIDEOGAMES, SORT } from "../constants/actionstypes"
 import { ASCENDENTE } from "../constants/sortconst"
 
 
 const initialState = {
     videogames : [],
-    sortedvideogames:[]
+    sortedvideogames:[],
+    genres:[]
 }
 
 const rootReducer = (state=initialState,action) =>{
@@ -14,6 +15,11 @@ const rootReducer = (state=initialState,action) =>{
                 ...state,
                 videogames: action.payload,
                 sortedvideogames:action.payload
+            }
+        case FETCH_GENRES:
+            return {
+                ...state,
+                genres:action.payload
             }
         case SEARCH_VIDEOGAMES:
             return {

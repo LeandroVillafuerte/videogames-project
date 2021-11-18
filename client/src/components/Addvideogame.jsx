@@ -1,47 +1,79 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { fetchGenres } from "../actions";
 
 function Addvideogame() {
-  const [genre,setGenre] = useState([])
+  let storedGenres = useSelector((store) => store.genres);
+  console.log(storedGenres)
+  let dispatch = useDispatch();
+  useEffect(
+
+    () => {if(storedGenres.length === 0){dispatch(fetchGenres())}},
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+  
 
   const [videogame, setVideogame] = useState({
-    name:"",
-    description:"",
-    release_date:"",
-    rating:[],
-    platforms:[],
-    background_image:"",
-    genres:[]
+    name: "",
+    description: "",
+    release_date: "",
+    rating: [],
+    platforms: [],
+    background_image: "",
+    genres: [],
   });
-  let history = useHistory();
 
-  function addGenreHandler(e) {
-    let newGenre = genre
-    setVideogame({
-      ...videogame,
-      genres:[...videogame.genres,newGenre]
-    })
-    setGenre([])
-  }
-  
-  function onInputChange(e) {
-    e.preventDefault();
-    if (e.target.name === "rating" || e.target.name === "platforms"  ){
+  function handleCheck(e) {
+    if (e.target.checked) {
       setVideogame({
         ...videogame,
-        [e.target.name]: [e.target.name === "platforms"?e.target.value: Number(e.target.value)],
+        genres: [...videogame.genres, Number(e.target.value)],
       });
-    } else if(e.target.name === "genres"){
-      setGenre(Number(e.target.value))
-    }
-    else{
-    setVideogame({
-      ...videogame,
-      [e.target.name]: e.target.value,
-    });
+    } else {
+      setVideogame({
+        ...videogame,
+        genres: videogame.genres.filter((t) => t !== Number(e.target.value)),
+      });
     }
   }
+
+  function onInputChange(e) {
+    e.preventDefault();
+    if (e.target.name === "rating" || e.target.name === "platforms") {
+      setVideogame({
+        ...videogame,
+        [e.target.name]: [
+          e.target.name === "platforms"
+            ? e.target.value
+            : Number(e.target.value),
+        ],
+      });
+    } else if (e.target.name === "genres") {
+      if (e.target.checked) {
+        setVideogame({
+          ...videogame,
+          [e.target.name]: [...videogame.genres, parseInt(e.target.value)],
+        });
+      } else {
+        setVideogame({
+          ...videogame,
+          [e.target.name]: videogame.genres.filter(
+            (elem) => elem !== parseInt(e.target.value)
+          ),
+        });
+      }
+    } else {
+      setVideogame({
+        ...videogame,
+        [e.target.name]: e.target.value,
+      });
+    }
+  }
+
+  let history = useHistory();
   function onSubmit(e) {
     console.log(videogame);
     e.preventDefault();
@@ -101,27 +133,24 @@ function Addvideogame() {
       ></input>
 
       <label htmlFor="">Genres:</label>
-      <input
-        type="text"
-        name="genres"
-        onChange={onInputChange}
-        value={genre}
-      ></input>
-      <input type="button" value="Add genre" onClick={addGenreHandler}/>
-      {
-      videogame.genres?.map((el, i) => (
-        <div key={`genre-${i}`}>
-          <label htmlFor={`genre-${i}`}>{`genre #${i + 1}`}</label>
-          <input
-              type="text"
-              name={`genre-${i}`}
-              id={i}
-              data-name="nombre"
-              value={el}
-          />
-        </div>
-      ))
-      }
+      <div>
+        {storedGenres && storedGenres.length > 0?storedGenres.map((el, i) => {
+          return(
+          <div key={i}>
+            <label>
+              <input
+                type="checkbox"
+                name={el.genre_name}
+                id={`chbx${i}`}
+                value={el.id}
+                onChange={handleCheck}
+              />{" "}
+              {el.genre_name}
+            </label>
+            <br />
+          </div>
+        )}):<span>Loading...</span>}
+      </div>
 
       <input type="submit" value="Save"></input>
     </form>

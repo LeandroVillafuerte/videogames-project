@@ -15,9 +15,9 @@ function Videogames() {
     return (
         <div>
             <Link to='/videogame/add'><button>Add videogame</button></Link>
-            {videogames.map((videogame)=>{
+            {videogames && videogames.length > 0?videogames.map((videogame)=>{
             return <Videogame key= {videogame.id} id={videogame.id} name={videogame.name} img={videogame.background_image}/>
-            })}
+            }):<span>Loading...</span>}
         </div>
     )
 }
