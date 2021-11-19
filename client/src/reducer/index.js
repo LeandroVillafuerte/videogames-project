@@ -1,4 +1,4 @@
-import { FETCH_GENRES, FETCH_VIDEOGAMES, SEARCH_VIDEOGAMES, SORT } from "../constants/actionstypes"
+import { FETCH_GENRES, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT } from "../constants/actionstypes"
 import { ASCENDENTE } from "../constants/sortconst"
 
 
@@ -41,6 +41,17 @@ const rootReducer = (state=initialState,action) =>{
             return {
                 ...state,
                 sortedvideogames:orderedvideogames
+            }
+        case FILTERBYGENRE:
+            let filteredVideogames = [...state.videogames];
+                filteredVideogames =  filteredVideogames.filter(elem =>
+                elem.genres.reduce((acc,el) =>{
+                if(action.payload.includes(el.id)) {acc = true}
+                return acc===true? acc:false }))
+            
+            return {
+                ...state,
+                sortedvideogames : filteredVideogames
             }
     
         default:

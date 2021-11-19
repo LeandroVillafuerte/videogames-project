@@ -36,7 +36,7 @@ router.get("/:id", async function (req, res) {
         .then((response) => {
           const resp = response.data;
           let game = responseObject(resp)
-          res.send(game);
+          res.status(200).send(game);
         })
         .catch(() => res.status(404).send("Game not found"));
     } else {

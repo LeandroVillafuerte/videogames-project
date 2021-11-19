@@ -1,5 +1,5 @@
 import axios from "axios";
-import  { FETCH_GENRES, FETCH_VIDEOGAMES, SEARCH_VIDEOGAMES, SORT } from "../constants/actionstypes.js"
+import  { FETCH_GENRES, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT } from "../constants/actionstypes.js"
   
 
 export const fetchVideogames = (payload) => {
@@ -7,7 +7,7 @@ export const fetchVideogames = (payload) => {
     axios
       .get("http://localhost:3001/videogames")
       .then((videogames) => {
-        return{ type: FETCH_VIDEOGAMES, payload: videogames.data };
+        dispatch({ type: FETCH_VIDEOGAMES, payload: videogames.data });
       })
       .catch((e) => {
         console.log(e);
@@ -45,5 +45,12 @@ export const sort = (order) => (
   {
   type: SORT,
   payload: order
+  }
+)
+
+export const filterByGenre = (payload) => (
+  {
+    type: FILTERBYGENRE,
+    payload,
   }
 )

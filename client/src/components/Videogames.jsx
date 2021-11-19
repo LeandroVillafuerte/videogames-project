@@ -7,16 +7,17 @@ import { Link } from 'react-router-dom';
 
 function Videogames() {
     let videogames = useSelector((store)=>store.sortedvideogames);
+    console.log(videogames)
     let dispatch = useDispatch();
-    useEffect(() => 
+    useEffect(() => {
         dispatch(fetchVideogames())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    ,[]);
+    },[]);
     return (
         <div>
             <Link to='/videogame/add'><button>Add videogame</button></Link>
             {videogames && videogames.length > 0?videogames.map((videogame)=>{
-            return <Videogame key= {videogame.id} id={videogame.id} name={videogame.name} img={videogame.background_image}/>
+            return <Videogame key= {videogame.id} genres={videogame.genres} id={videogame.id} name={videogame.name} img={videogame.background_image}/>
             }):<span>Loading...</span>}
         </div>
     )

@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import { fetchGenres } from "../actions";
 
 function Addvideogame() {
@@ -10,7 +11,7 @@ function Addvideogame() {
   let dispatch = useDispatch();
   useEffect(
 
-    () => {if(storedGenres.length === 0){dispatch(fetchGenres())}},
+    () => {if(storedGenres && storedGenres.length === 0){dispatch(fetchGenres())}},
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
@@ -74,15 +75,19 @@ function Addvideogame() {
   }
 
   let history = useHistory();
+  
+  
   function onSubmit(e) {
-    console.log(videogame);
+   // console.log(videogame);
     e.preventDefault();
     axios
       .post("http://localhost:3001/videogame", videogame)
-      .then(() => history.push("/"))
+      .then(() => history.push("/home"))
       .catch((e) => console.log(e));
   }
   return (
+    <>
+    <Link to='/home'><button>return home</button></Link>
     <form onSubmit={onSubmit}>
       <label htmlFor="">Name:</label>
       <input
@@ -154,6 +159,7 @@ function Addvideogame() {
 
       <input type="submit" value="Save"></input>
     </form>
+    </>
   );
 }
 

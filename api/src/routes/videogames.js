@@ -1,4 +1,4 @@
-const { Videogame } = require("../db");
+const { Videogame, Genre } = require("../db");
 const { Op } = require("sequelize");
 const axios = require("axios").default;
 const router = require("express").Router();
@@ -29,6 +29,13 @@ function responseObject(resp) {
     release_date: resp.released,
     background_image: resp.background_image,
     rating: resp.rating,
+    genres: resp.genres.map((element) => {
+      return {
+        id: element.id,
+        name: element.name,
+        image_background: element.image_background,
+      };
+    }),
   };
 }
 
@@ -37,12 +44,16 @@ function responseObject(resp) {
 router.get("/", async function (req, res) {
   const name = req.query.name;
   try {
+    
+    
+
     if (name) {
+
       const options = {
         where: { name: { [Op.iLike]: `%${name}%` } },
-        limit: 15,
+        include: { model: Genre },
       };
-
+  
       let info = await videogamesFinder(options);
 
       axios
@@ -67,7 +78,8 @@ router.get("/", async function (req, res) {
         )
         .catch((err) => res.status(400).send(err));
     } else {
-      let info = await videogamesFinder();
+      let info = []
+      info = await videogamesFinder({include:{model:Genre}})
       axios
         .get(`https://api.rawg.io/api/games?key=${API_KEY}`)
         .then((response) => {
@@ -76,16 +88,12 @@ router.get("/", async function (req, res) {
           );
           return games;
         })
-        .then((response) => {
-          for (let i = 0; i < response.length; i++) {
-            info.push(response[i]);
-          }
-        })
-        .then(() =>
+        .then((response) =>{
+          info = [...info, ...response];
           info && info.length > 0
             ? res.status(200).send(info)
             : res.status(404).send("No results")
-        )
+        })
         .catch((err) => res.status(400).send(err));
     }
   } catch (e) {
