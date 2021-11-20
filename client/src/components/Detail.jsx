@@ -2,6 +2,7 @@ import { useEffect , useState } from 'react'
 import axios from 'axios';
 import { useParams } from 'react-router'
 import  parse  from 'html-react-parser'
+import { Link } from 'react-router-dom';
 
 
 
@@ -18,6 +19,7 @@ function Detail() {
 
     return (
         <div>
+            <Link to="/home"><input type="button" value="Home"/></Link>
             {
                 videogame?
                 <>

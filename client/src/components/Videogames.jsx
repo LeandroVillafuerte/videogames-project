@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 function Videogames() {
     let videogames = useSelector((store)=>store.sortedvideogames);
-    console.log(videogames)
     let dispatch = useDispatch();
     useEffect(() => {
         dispatch(fetchVideogames())

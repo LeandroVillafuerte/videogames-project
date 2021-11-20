@@ -6,6 +6,8 @@ import { Switch, Route } from 'react-router'
 import Detail from './components/Detail.jsx';
 import Addvideogame from './components/Addvideogame.jsx';
 import Landing from './components/Landing';
+import FilterGenre from './components/FilterGenre.jsx';
+import CreatedByUser from './components/CreatedByUser';
 
 
 function App() {
@@ -17,8 +19,10 @@ function App() {
           <Addvideogame/>
         </Route>
         <Route exact path='/home'>
-          <Searchbar/>
+          <Searchbar/>     
+          <CreatedByUser/>     
           <Sortvideogames/>
+          <FilterGenre/>
           <Videogames/>
         </Route>
         <Route exact path='/videogame/:id'>

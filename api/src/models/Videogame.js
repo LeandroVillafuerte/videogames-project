@@ -24,7 +24,7 @@ module.exports =(sequelize) => {
         defaultValue: DataTypes.NOW,
       },
       rating: {
-        type: DataTypes.ARRAY(DataTypes.INTEGER),
+        type: DataTypes.REAL,
       },
       platforms: {
         type: DataTypes.ARRAY(DataTypes.STRING),

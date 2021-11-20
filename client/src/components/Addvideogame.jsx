@@ -7,7 +7,6 @@ import { fetchGenres } from "../actions";
 
 function Addvideogame() {
   let storedGenres = useSelector((store) => store.genres);
-  console.log(storedGenres)
   let dispatch = useDispatch();
   useEffect(
 
@@ -21,7 +20,7 @@ function Addvideogame() {
     name: "",
     description: "",
     release_date: "",
-    rating: [],
+    rating: "",
     platforms: [],
     background_image: "",
     genres: [],
@@ -43,13 +42,10 @@ function Addvideogame() {
 
   function onInputChange(e) {
     e.preventDefault();
-    if (e.target.name === "rating" || e.target.name === "platforms") {
+    if (e.target.name === "platforms") {
       setVideogame({
         ...videogame,
-        [e.target.name]: [
-          e.target.name === "platforms"
-            ? e.target.value
-            : Number(e.target.value),
+        [e.target.name]: [Number(e.target.value),
         ],
       });
     } else if (e.target.name === "genres") {
@@ -66,7 +62,13 @@ function Addvideogame() {
           ),
         });
       }
-    } else {
+    } else if (e.target.name === "rating") {
+      setVideogame({
+        ...videogame,
+        [e.target.name]: Number(e.target.value),
+      });
+    }
+    else {
       setVideogame({
         ...videogame,
         [e.target.name]: e.target.value,
@@ -145,12 +147,12 @@ function Addvideogame() {
             <label>
               <input
                 type="checkbox"
-                name={el.genre_name}
+                name={el.name}
                 id={`chbx${i}`}
                 value={el.id}
                 onChange={handleCheck}
               />{" "}
-              {el.genre_name}
+              {el.name}
             </label>
             <br />
           </div>
