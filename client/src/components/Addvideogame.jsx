@@ -45,7 +45,7 @@ function Addvideogame() {
     if (e.target.name === "platforms") {
       setVideogame({
         ...videogame,
-        [e.target.name]: [Number(e.target.value),
+        [e.target.name]: [e.target.value
         ],
       });
     } else if (e.target.name === "genres") {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import  { FETCH_GENRES, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT, VIDEOGAMEORIGIN } from "../constants/actionstypes.js"
+import  { FETCH_GENRES, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT, SORTRATING, VIDEOGAMEORIGIN } from "../constants/actionstypes.js"
   
 
 export const fetchVideogames = (payload) => {
@@ -58,6 +58,13 @@ export const filterByGenre = (payload) => (
 export const videogameOrigin = (payload) => (
   {
   type: VIDEOGAMEORIGIN,
+  payload: payload
+  }
+)
+
+export const sortRating = (payload) => (
+  {
+  type: SORTRATING,
   payload: payload
   }
 )

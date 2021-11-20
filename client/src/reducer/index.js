@@ -4,6 +4,7 @@ import {
   FILTERBYGENRE,
   SEARCH_VIDEOGAMES,
   SORT,
+  SORTRATING,
   VIDEOGAMEORIGIN,
 } from "../constants/actionstypes";
 import {
@@ -16,6 +17,8 @@ import { ASCENDENTE } from "../constants/sortconst";
 const initialState = {
   videogames: [],
   sortedvideogames: [],
+  originSelected:"",
+  byoriginVideogames:[],
   genres: [],
 };
 
@@ -38,23 +41,23 @@ const rootReducer = (state = initialState, action) => {
         sortedvideogames: action.payload,
       };
     case SORT:
-      let orderedvideogames = [...state.sortedvideogames];
-      orderedvideogames.sort((a, b) => {
-        if (a.name < b.name) {
-          return action.payload === ASCENDENTE ? -1 : 1;
-        }
-        if (a.name > b.name) {
+      let sortvideogames = [...state.sortedvideogames];
+      sortvideogames.sort((a, b) => {
+        if (a.name.toLowerCase() < b.name.toLowerCase()) {
           return action.payload === ASCENDENTE ? 1 : -1;
+        }
+        if (a.name.toLowerCase() > b.name.toLowerCase()) {
+          return action.payload === ASCENDENTE ? -1 : 1;
         }
         // a debe ser igual b
         return 0;
       });
       return {
         ...state,
-        sortedvideogames: orderedvideogames,
+        sortedvideogames: sortvideogames,
       };
     case FILTERBYGENRE:
-      let filteredVideogames = [...state.videogames];
+      let filteredVideogames = state.byoriginVideogames.length>0? state.byoriginVideogames : state.videogames;
       if (action.payload.length !== 0) {
         filteredVideogames = filteredVideogames.filter((elem) =>
           action.payload.every((el) =>
@@ -69,7 +72,7 @@ const rootReducer = (state = initialState, action) => {
       } else {
         return {
           ...state,
-          sortedvideogames: state.videogames,
+          sortedvideogames: filteredVideogames,
         };
       }
     case VIDEOGAMEORIGIN:
@@ -79,7 +82,9 @@ const rootReducer = (state = initialState, action) => {
         case SEEALL:
           return {
             ...state,
-            sortedvideogames: byorigin,
+            sortedvideogames: state.videogames,
+            byoriginVideogames:[],
+            originSelected: action.payload
           };
         case CREATEDBYUSER:
           byorigin = byorigin.filter(
@@ -89,6 +94,8 @@ const rootReducer = (state = initialState, action) => {
           return {
             ...state,
             sortedvideogames: byorigin,
+            byoriginVideogames: byorigin,
+            originSelected: action.payload
           };
         case FROMLIBRARY:
           byorigin = byorigin.filter(
@@ -98,10 +105,28 @@ const rootReducer = (state = initialState, action) => {
           return {
             ...state,
             sortedvideogames: byorigin,
+            byoriginVideogames: byorigin,
+            originSelected: action.payload
           };
         default:
           return state;
       }
+    case SORTRATING:
+      let orderedrating = [...state.sortedvideogames];
+      orderedrating.sort((a, b) => {
+        if (a.rating < b.rating) {
+          return action.payload === ASCENDENTE ? -1 : 1;
+        }
+        if (a.rating > b.rating) {
+          return action.payload === ASCENDENTE ? 1 : -1;
+        }
+        // a debe ser igual b
+        return 0;
+      });
+      return {
+        ...state,
+        sortedvideogames: orderedrating,
+      };
 
     default:
       return state;

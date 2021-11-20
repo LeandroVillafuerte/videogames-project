@@ -41,12 +41,8 @@ function responseObject(resp) {
 
 ////////////////////////////////// Routes //////////////////////////////////////////////////////
 
-router.get("/", async function (req, res) {
+router.get("/", async function (req, res,next) {
   const name = req.query.name;
-  try {
-    
-    
-
     if (name) {
 
       const options = {
@@ -62,43 +58,41 @@ router.get("/", async function (req, res) {
           const games = response.data.results.map((game) =>
             responseObject(game)
           );
-          return games;
-        })
-        .then((response) => {
           let counter = 0;
           while (info.length < 15) {
-            info.push(response[counter]);
+            info.push(games[counter]);
             counter++;
           }
-        })
-        .then(() =>
           info && info.length > 0
             ? res.status(200).send(info)
             : res.status(404).send("No results")
-        )
-        .catch((err) => res.status(400).send(err));
+        })
+        .catch(next);
     } else {
       let info = []
       info = await videogamesFinder({include:{model:Genre}})
-      axios
-        .get(`https://api.rawg.io/api/games?key=${API_KEY}`)
-        .then((response) => {
-          const games = response.data.results.map((game) =>
-            responseObject(game)
-          );
-          return games;
-        })
-        .then((response) =>{
-          info = [...info, ...response];
-          info && info.length > 0
-            ? res.status(200).send(info)
-            : res.status(404).send("No results")
-        })
-        .catch((err) => res.status(400).send(err));
+
+      Promise.all([axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`),
+      axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2`),
+      axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=3`),
+      axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=4`),
+      axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=5`)])
+      .then((response) => {
+        let pages = []
+        for (let i = 0; i < response.length; i++) {
+          pages = [...pages, ...response[i].data.results]
+          
+        }
+        const games = pages.map((game) =>
+          responseObject(game)
+        );
+        info=[...info,...games]
+        info && info.length > 0
+        ? res.status(200).send(info)
+        : res.status(404).send("No results")
+      })
+      .catch(next);
     }
-  } catch (e) {
-    res.status(400).send(e);
-  }
 });
 
 module.exports = router;

@@ -7,11 +7,17 @@ function FilterGenre() {
   const [genres, setGenres] = useState([]) 
 
   let storedGenres = useSelector((store) => store.genres)
+  let originSelected = useSelector((store)=> store.originSelected)
   let dispatch = useDispatch();
 
   useEffect(()=>{if(storedGenres && storedGenres.length === 0){dispatch(fetchGenres(genres))}}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   ,[])
+
+  useEffect(()=>{
+    dispatch(filterByGenre(genres))}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    ,[originSelected])
 
   function handleCheck(e) {
     if (e.target.checked) {

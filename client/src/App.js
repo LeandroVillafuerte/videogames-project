@@ -8,6 +8,8 @@ import Addvideogame from './components/Addvideogame.jsx';
 import Landing from './components/Landing';
 import FilterGenre from './components/FilterGenre.jsx';
 import CreatedByUser from './components/CreatedByUser';
+import SortRating from './components/SortRating';
+
 
 
 function App() {
@@ -19,7 +21,8 @@ function App() {
           <Addvideogame/>
         </Route>
         <Route exact path='/home'>
-          <Searchbar/>     
+          <Searchbar/>   
+          <SortRating/>  
           <CreatedByUser/>     
           <Sortvideogames/>
           <FilterGenre/>

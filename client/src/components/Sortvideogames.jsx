@@ -16,8 +16,8 @@ function Sortvideogames() {
   return (
     <div>
       <select name="select" onChange={onSelectChange}>
-        <option value={ASCENDENTE}>ascendente</option>
-        <option value={DESCENDENE}>descendente</option>
+        <option value={ASCENDENTE}>Z-A</option>
+        <option value={DESCENDENE}>A-Z</option>
       </select>
     </div>
   );
