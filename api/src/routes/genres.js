@@ -12,14 +12,15 @@ router.get("/", async function (req, res) {
     .get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
     .then((response) => {
       const genres = response.data.results.map((genre) => ({
-        genre_name: genre.name,
-        url_img: genre.image_background,
+        id:genre.id,
+        name: genre.name,
+        image_background: genre.image_background,
       }));
       return Promise.all(
         genres.map((genres) =>
           Genre.findOrCreate({
-            where: { genre_name: genres.genre_name },
-            defaults: { url_img: genres.url_img },
+            where: { id:genres.id, },
+            defaults: { name: genres.name,image_background: genres.image_background },
           })
         )
       );
@@ -30,7 +31,7 @@ router.get("/", async function (req, res) {
     .then((response) => {
       res.json(response);
     })
-    .catch(() => res.status(500).send("Internal Error"));
+    .catch((e) => {console.log(e);res.status(500).send("Error")});
 });
 
 module.exports = router;

@@ -23,17 +23,17 @@ const { conn } = require('./src/db.js');
 
 //Syncing models separately
 
-Promise.all([Videogame.sync({force:true}),Genre.sync({force:false})])
+/* Promise.all([Videogame.sync({force:false}),Genre.sync({force:false})])
 .then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); 
   });
-});
+}); */
 
 
 // Syncing all the models at once.
-/* conn.sync({ force: true }).then(() => {
+conn.sync({ force: true }).then(() => {
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });
-}); */
+});

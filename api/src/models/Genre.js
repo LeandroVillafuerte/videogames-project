@@ -6,10 +6,15 @@ module.exports = (sequelize) => {
   sequelize.define(
     "genre",
     {
-      genre_name: {
+      id:{
+        type:DataTypes.INTEGER,
+        primaryKey:true,
+        autoIncrement:false
+      },
+      name: {
         type: DataTypes.STRING,
       },
-      url_img:{
+      image_background:{
         type: DataTypes.STRING,
       }
     },
