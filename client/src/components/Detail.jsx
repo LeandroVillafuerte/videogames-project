@@ -14,8 +14,7 @@ function Detail() {
         .then(response => setVideogame(response.data))
 
         return () => setVideogame(null)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [id])
 
     return (
         <div>

@@ -62,12 +62,7 @@ function Addvideogame() {
           ),
         });
       }
-    } else if (e.target.name === "rating") {
-      setVideogame({
-        ...videogame,
-        [e.target.name]: Number(e.target.value),
-      });
-    }
+    } 
     else {
       setVideogame({
         ...videogame,

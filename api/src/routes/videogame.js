@@ -63,11 +63,11 @@ router.post("/", async function (req, res) {
     description,
     release_date,
     rating,
-    platforms,
     background_image,
   });
 
   await videogame.addGenres(genres);
+  await videogame.addPlatforms(platforms)
   res.status(201).send("Game successfully created");
 });
 
