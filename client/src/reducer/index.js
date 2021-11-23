@@ -1,5 +1,6 @@
 import {
   FETCH_GENRES,
+  FETCH_PLATFORMS,
   FETCH_VIDEOGAMES,
   FILTERBYGENRE,
   SEARCH_VIDEOGAMES,
@@ -20,6 +21,8 @@ const initialState = {
   originSelected:"",
   byoriginVideogames:[],
   genres: [],
+  platforms:[],
+  loaded:false
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,11 +32,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         videogames: action.payload,
         sortedvideogames: action.payload,
+        loaded:true
       };
     case FETCH_GENRES:
       return {
         ...state,
         genres: action.payload,
+      };
+    case FETCH_PLATFORMS:
+      return {
+        ...state,
+        platforms: action.payload,
       };
     case SEARCH_VIDEOGAMES:
       return {

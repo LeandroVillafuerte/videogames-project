@@ -4,11 +4,13 @@ import { fetchVideogames } from "../actions";
 import Videogame from "./Videogame.jsx";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination.jsx";
+import Loader from "./Loader";
 
 function Videogames() {
   let dispatch = useDispatch();
 
   let videogames = useSelector((store) => store.sortedvideogames);
+  let loaded = useSelector(store => store.loaded) 
   useEffect(() => {
     dispatch(fetchVideogames());
   }, [dispatch]);
@@ -34,7 +36,7 @@ function Videogames() {
         totalVideogames={videogames.length}
         itemsPerPage={15}
       />
-      {currentItems && currentItems.length > 0 ? (
+      { loaded ? (
         currentItems.map((videogame) => {
           return (
             <Videogame
@@ -47,7 +49,7 @@ function Videogames() {
           );
         })
       ) : (
-        <span>Loading...</span>
+        <Loader/>
       )}
       <Pagination
         currentPage={currentPage}
