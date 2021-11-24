@@ -1,0 +1,14 @@
+.genres{
+    text-align: left;
+    padding: 10px 20px;
+}
+
+.genres div{
+    width: 100%;
+    transition:all 0.3s
+}
+
+
+.genres div:hover{
+    color:#5F762F
+}

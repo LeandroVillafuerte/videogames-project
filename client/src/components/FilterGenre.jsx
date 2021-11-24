@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchGenres, filterByGenre } from '../actions';
+import './styles/FilterGenre.css'
 
 function FilterGenre() {
 
@@ -41,7 +42,7 @@ function FilterGenre() {
     return (
         <div>
         <h4>Filter By Genre</h4>
-        <form onSubmit={onSubmit}>
+        <form class="genres" onSubmit={onSubmit}>
         {storedGenres && storedGenres.length > 0?storedGenres.map((el, i) => {
           return(
           <div key={i}>
@@ -58,7 +59,10 @@ function FilterGenre() {
             <br />
           </div>
         )}):<span>Loading...</span>}
+        <br/>
         <input type="submit" value="Apply filter"></input>
+        <br/>
+        <br/>
         </form>
       </div>
     )

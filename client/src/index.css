@@ -5,6 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgb(43,92,168);
+  background: linear-gradient(180deg, rgba(43,92,168,1) 0%, rgba(135,111,187,1) 65%, rgba(203,136,189,1) 93%, rgba(230,201,167,1) 100%);
+  background-attachment: fixed;
+  /* font-family: "videogamefont"; */
+}
+@font-face {
+  font-family: "videogamefont";
+  src: url("./fonts/Retro\ Gaming.ttf");
 }
 
 code {

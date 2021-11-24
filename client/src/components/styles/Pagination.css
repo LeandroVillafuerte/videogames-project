@@ -1,0 +1,37 @@
+.pageNumbers{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    margin-left: 350px;
+    padding:20px;
+}
+
+.pageNumbers li{
+    margin-right: 10px;
+    
+
+}
+
+.buttonList {
+    font-family: "videogamefont";
+    border-radius: 5px;
+    background-color: #29323c;
+    /* box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75); */
+    font-weight: 100;
+    color: #fff;
+    padding:10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    
+}
+
+.buttonList:hover{
+    
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+
+#selectPage{
+    font-family: "videogamefont";
+    margin-top: 11px;
+    padding-right: 10px;
+}

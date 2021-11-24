@@ -1,0 +1,26 @@
+.landing {
+    background-image: url(../../images/background.png);
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    min-width: 100vh;
+    position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@font-face {
+    font-family: "videogamefont";
+    src: url("../../fonts/Retro\ Gaming.ttf");
+}
+
+
+.start{
+    font-family: "videogamefont";
+    font-size: 2rem;
+    background-color:transparent;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-weight: bold;
+}
+

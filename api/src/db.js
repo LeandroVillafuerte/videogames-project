@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { Sequelize , Op} = require('sequelize');
+const { Sequelize,DataTypes, Op} = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
@@ -30,14 +30,15 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Videogame , Genre , Platform } = sequelize.models;
+const { Videogame , Genre , Platform  } = sequelize.models;
+
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Videogame.belongsToMany(Genre, {through: 'videogame_genre', timestamps:false});
 Genre.belongsToMany(Videogame,{through:'videogame_genre',timestamps:false});
-Videogame.belongsToMany(Platform, {through: 'videogame_platform', timestamps:false});
-Platform.belongsToMany(Videogame,{through: 'videogame_platform', timestamps:false})
+Videogame.belongsToMany(Platform, {through: "videogame_platform" ,foreignKey:{ name:"videogameId",allowNull: false },timestamps:false});
+Platform.belongsToMany(Videogame,{through: "videogame_platform" ,foreignKey: { name:"platformId", allowNull: false }, timestamps:false})
 
 
 

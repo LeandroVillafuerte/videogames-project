@@ -1,20 +1,29 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import "./styles/Videogame.css"
 
 function Videogame(props) {
     return (
-        <div>
+        <div className="videogame card">
             <Link to={`/videogame/${props.id}`}>
-            <h4>{props.name}</h4>
-            <img style= {{width: "200px"}} src={props.img} alt="Videogame img" />
-            <div>
-                {props.genres?.map((genre,i)=>{
-                    return(
-                        <div key={`${props.id}+${1+i}`}>
-                        <span>{genre.name} </span>
-                        </div>
-                    )
-                })}
+            <img src={props.img} alt="Videogame img" />
+            <h4 className="videogameTitle">{props.name}</h4>
+            <div className="info">
+                <div className="videogameGenres">
+                    <h4>Genres:</h4>
+                    {props.genres?.map((genre,i)=>{
+                        return(
+                            <div key={`${props.id}+${1+i}`}>
+                            <span>{genre.name} </span>
+                            </div>
+                        )
+                    })}
+                </div>
+                <div>
+                <h4>Rating</h4>
+                <h3>{props.rating}</h3>                
+                </div>
+
             </div>
             </Link>
         </div>

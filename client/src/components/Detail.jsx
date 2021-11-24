@@ -19,15 +19,17 @@ function Detail() {
     return (
         <div>
             <Link to="/home"><input type="button" value="Home"/></Link>
+            <div>
             {
                 videogame?
                 <>
                 <h4>{videogame && videogame.name}</h4>
-                <img style= {{width: "200px"}} src={videogame && videogame.background_image} alt="Videogame img" />
+                <img src={videogame && videogame.background_image} alt="Videogame img" />
                 <div>{videogame && parse(videogame.description)}</div>
                 </>:
                 <div>loading...</div>
             }
+            </div>
         </div>
     )
 }

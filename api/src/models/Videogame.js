@@ -13,11 +13,11 @@ module.exports =(sequelize) => {
       },
       name: {
         type: DataTypes.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       description: {
         type: DataTypes.TEXT,
-        allowNull: true,
+        allowNull: false,
       },
       release_date: {
         type: DataTypes.DATEONLY,
@@ -27,7 +27,7 @@ module.exports =(sequelize) => {
         type: DataTypes.REAL,
       },
       background_image:{
-        type: DataTypes.STRING
+        type: DataTypes.TEXT
       }
 
     },

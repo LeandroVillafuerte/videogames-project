@@ -1,0 +1,39 @@
+.videogame{
+    border:4px solid white;
+    width: 400px;
+    border-radius: 12px;
+    height: 450px;
+    margin-bottom: 20px;
+    background: #141414;
+   
+
+}
+.info{
+    margin-top: 5px;
+    display: flex;
+    color:white;
+    justify-content: space-evenly;
+}
+.videogameTitle{
+
+    font-family: "videogamefont";
+    color:white;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.videogameGenres{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    
+}
+
+.videogame img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+

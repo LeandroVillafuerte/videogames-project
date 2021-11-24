@@ -1,4 +1,5 @@
 import React from "react";
+import "./styles/Pagination.css"
 
 function Pagination({
   currentPage,
@@ -14,6 +15,7 @@ function Pagination({
   return (
     <>
       <ul className="pageNumbers">
+      <span id="selectPage">Select page:          </span>
         {pages.map((number) => {
           return (
             <li
@@ -22,7 +24,7 @@ function Pagination({
               onClick={() => setCurrentPage(number)}
               className={currentPage === number ? "active" : null}
             >
-              <button>{number}</button>
+              <button className="buttonList">{number}</button>
             </li>
           );
         })}

@@ -2,6 +2,7 @@ import React from 'react';
 import {useState} from 'react'
 import { useDispatch } from 'react-redux';
 import { searchVideogames } from '../actions';
+import "./styles/Home.css"
 
 
 function Searchbar() {
@@ -20,8 +21,8 @@ function Searchbar() {
     return (
         <div>
             <form onSubmit= {onSubmit}>
-                <input type="text" onChange={onInputChange} value={search}/>
-                <input type="submit" value="Buscar"/>
+                <input id="inpsearch" type="text" onChange={onInputChange} value={search} placeholder="Search by name..."/>
+                <input className="nav" type="submit" value="Search" />
             </form>
         </div>
     )
