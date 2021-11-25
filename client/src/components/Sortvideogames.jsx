@@ -14,11 +14,14 @@ function Sortvideogames() {
     dispatch(sort(e.target.value))    
   }
   return (
-    <div>
+    <div className="selectfilters">
+      <h4>Order alphabetically</h4> 
       <select name="select" onChange={onSelectChange}>
+        <option name="--Select one--" disabled selected>--Select one--</option>
         <option value={ASCENDENTE}>Z-A</option>
         <option value={DESCENDENE}>A-Z</option>
       </select>
+      <br/>
     </div>
   );
 }

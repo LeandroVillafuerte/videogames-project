@@ -1,5 +1,5 @@
 import axios from "axios";
-import  { FETCH_GENRES, FETCH_PLATFORMS, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT, SORTRATING, VIDEOGAMEORIGIN } from "../constants/actionstypes.js"
+import  { FETCH_GENRES, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT, SORTRATING, VIDEOGAMEORIGIN } from "../constants/actionstypes.js"
   
 
 export const fetchVideogames = (payload) => {
@@ -41,18 +41,18 @@ export const fetchGenres = (payload) => {
   };
 };
 
-export const fetchPlatforms = (payload) => {
-  return function (dispatch) {
-    axios
-      .get("http://localhost:3001/platforms")
-      .then((platforms) => {
-        dispatch({ type: FETCH_PLATFORMS, payload:platforms.data });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
-};
+// export const fetchPlatforms = (payload) => {
+//   return function (dispatch) {
+//     axios
+//       .get("http://localhost:3001/platforms")
+//       .then((platforms) => {
+//         dispatch({ type: FETCH_PLATFORMS, payload:platforms.data });
+//       })
+//       .catch((e) => {
+//         console.log(e);
+//       });
+//   };
+// };
 
 export const sort = (order) => (
   {

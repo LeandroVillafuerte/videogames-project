@@ -10,9 +10,10 @@ function SortRating() {
       dispatch(sortRating(e.target.value))    
     }
     return (
-      <div>
+      <div className="selectfilters">
+        <h4>Sort by rating</h4>
         <select name="select" onChange={onSelectChange}>
-          <option name="sort by rating" disabled selected>Sort by rating</option>
+          <option name="sort by rating" disabled selected>--Select one--</option>
           <option value={ASCENDENTE}>Low to high</option>
           <option value={DESCENDENE}>High to low</option>
         </select>

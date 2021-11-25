@@ -1,4 +1,4 @@
-const { Platform } = require("../db");
+/* const { Platform } = require("../db");
 const router = require("express").Router();
 const { API_KEY } = process.env;
 const axios = require("axios").default;
@@ -35,3 +35,4 @@ router.get("/", async function (req, res) {
 });
 
 module.exports = router;
+ */

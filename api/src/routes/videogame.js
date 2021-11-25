@@ -11,7 +11,7 @@ function responseObject(resp) {
   return {
     id: resp.id,
     name: resp.name,
-    description: resp.description,
+    description: resp.description_raw,
     release_date: resp.released,
     rating: resp.rating,
     platforms: resp.platforms.map((element) => element.platform.name),
@@ -64,10 +64,11 @@ router.post("/", async function (req, res) {
     release_date,
     rating,
     background_image,
+    platforms
   });
 
   await videogame.addGenres(genres);
-  await videogame.addPlatforms(platforms)
+  // await videogame.addPlatforms(platforms)
   res.status(201).send("Game successfully created");
 });
 

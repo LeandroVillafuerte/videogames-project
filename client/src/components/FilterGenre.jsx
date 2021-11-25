@@ -40,7 +40,7 @@ function FilterGenre() {
   }
 
     return (
-        <div>
+        <div className="selectfilters">
         <h4>Filter By Genre</h4>
         <form class="genres" onSubmit={onSubmit}>
         {storedGenres && storedGenres.length > 0?storedGenres.map((el, i) => {
@@ -60,7 +60,7 @@ function FilterGenre() {
           </div>
         )}):<span>Loading...</span>}
         <br/>
-        <input type="submit" value="Apply filter"></input>
+        <input className="homebtn" type="submit" value="Apply filter"></input>
         <br/>
         <br/>
         </form>

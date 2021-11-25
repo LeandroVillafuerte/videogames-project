@@ -1,0 +1,79 @@
+.principal{
+    display: flex;
+    padding: 15px 30px;
+    position: absolute;
+    top: 10vh;
+    margin-right: auto;    
+    margin-left: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    /* box-sizing: content-box; */
+    border: 3px solid white;
+    width: 70vh;
+    box-sizing: border-box;
+    background-clip: padding-box;
+    height: 1500px;
+    text-align: left;
+    background-color: black;
+    color: white;
+    margin-bottom: 30px;
+    
+}
+
+
+.selectores{
+    color: white;
+}
+
+
+.selectores select{
+    font-size: 15px;
+    letter-spacing: 4px;
+    width: 15rem;
+    height: 150px;
+    text-align: center;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    border-color: white;
+    color:white;
+    background-color: rgb(148, 148, 148);
+    border-radius: 14px;
+    scrollbar-width: none;  
+}
+
+.selectores ::-webkit-scrollbar{
+    background-color: rgba(255, 255, 255, 0.308);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    
+}
+
+.butn{
+    background: seagreen;
+    padding: 5px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    color:seashell;
+    font-weight: 100;
+}
+
+.detimage input{
+    width: 50vh;
+}
+
+.detgenres {
+    display: flex;
+    max-height: 500px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.detsubmit{
+    text-align: center;
+    margin-left: 70px;
+
+}
+#create{
+    font-family: videogamefont;
+}

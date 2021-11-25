@@ -34,10 +34,12 @@ function Videogames() {
   return (
     <div>
       <div className="header">
+        <Link to="/">
         <span id="title">👾 Videogames App 🎮</span>
+        </Link>
         <div className="actions">
         <Link to="/videogame/add">
-          <button className="nav" id="add">Add new videogame</button>
+          <button className="navbutton" id="add">Add new videogame</button>
         </Link>
         <Searchbar />
         </div>

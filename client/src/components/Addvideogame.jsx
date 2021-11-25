@@ -3,22 +3,22 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import { fetchGenres, fetchPlatforms } from "../actions";
-import Select from "react-select";
+import { fetchGenres} from "../actions";
+import "./styles/Addvideogame.css"
 
 
 function Addvideogame() {
   let storedGenres = useSelector((store) => store.genres);
-  let storedPlatforms = useSelector((store) => store.platforms);
+  // let storedPlatforms = useSelector((store) => store.platforms);
   let dispatch = useDispatch();
   useEffect(() => {
     if (storedGenres && storedGenres.length === 0) {
       dispatch(fetchGenres());
     }
-    if (storedPlatforms && storedPlatforms.length === 0) {
+ /*    if (storedPlatforms && storedPlatforms.length === 0) {
       dispatch(fetchPlatforms());
-    }
-  }, [dispatch, storedGenres, storedPlatforms]);
+    } */
+  }, [dispatch, storedGenres]);
 
   const [activeError,setActiveError] = useState({name:false,description:false,platforms:false,rating:false})
   const [errors, setErrors] = useState({
@@ -71,7 +71,6 @@ function Addvideogame() {
   }
 
   function onInputChange(e) {
-    e.preventDefault();
     if (e.target.name === "rating") {
       setVideogame({ ...videogame, [e.target.name]: Number(e.target.value) });
     } else {
@@ -88,15 +87,43 @@ function Addvideogame() {
     }
   }
 
-  function platformsHandler(e) {
-    setVideogame({ ...videogame, platforms: e.map((el) => el.id) });
-    setErrors(Validate({ ...videogame, platforms: e.map((el) => el.id) }));
-  }
+  function handleSelectionP(e){
+    setVideogame({
+        ...videogame,
+        [e.target.name] : [...videogame.platforms, e.target.value]
+    })
+    setErrors(Validate({
+        ...videogame,
+        platforms: e.target.value
+    }))
+  } 
+
+  function handleSelectionD(e){
+    setVideogame({
+        ...videogame,
+        [e.target.name] : e.target.value
+    })
+    setErrors(Validate({
+        ...videogame,
+        description: e.target.value
+    }))
+  } 
+  // function platformsHandler(e) {
+  //   setVideogame({ ...videogame, platforms: e.map((el) => el.id) });
+  //   setErrors(Validate({ ...videogame, platforms: e.map((el) => el.id) }));
+  // }
 
 
   function handleErrorClick(e){
     setActiveError({name:!!errors.name,platforms:!!errors.platforms,description:!!errors.description,rating:!!errors.rating})
   }
+
+  function handleDeletePlat(el){
+    setVideogame({
+        ...videogame,
+        platforms: videogame.platforms.filter( occ => occ !== el)
+    })
+}
 
   let history = useHistory();
   function onSubmit(e) {
@@ -107,13 +134,18 @@ function Addvideogame() {
       .catch((e) => console.log(e));
   }
   return (
-    <>
+    <div>
       <Link to="/home">
-        <button>return home</button>
+        <button className="butn">Return Home</button>
       </Link>
+      <div>
+        <h1 id="create">Create a videogame</h1>
+      </div>
+      <div className="principal">
       <form onSubmit={onSubmit}>
-        <div>
+        <div className="detname">
         <label htmlFor="">Name*:</label>
+        <br/><br/>
         <input
           placeholder="Awesome name"
           type="text"
@@ -124,24 +156,31 @@ function Addvideogame() {
         {activeError.name&&(
           <label>{errors.name}</label>
         )}
+        
         </div>
-
-        <div>
+        <br/>
+        <div className="detdescription">
         <label htmlFor="">Description*:</label>
-        <input
+        <br/><br/>
+        <textarea
           placeholder="Game description"
-          type="text"
+          rows="5"
+          cols="50"
+          type="textarea"
           name="description"
-          onChange={onInputChange}
+          onChange={handleSelectionD}
           value={videogame.description}
-        ></input>
+          style={{resize : "none"}}
+          required
+        />
         {activeError.description&&(
           <label>{errors.description}</label>
         )}
         </div>
-
-        <div>
+        <br/>
+        <div className="detreleasedate">
         <label htmlFor="">Release date:</label>
+        <br/><br/>
         <input
           type="date"
           name="release_date"
@@ -149,9 +188,11 @@ function Addvideogame() {
           value={videogame.release_date}
         ></input>
         </div>
-
-        <div>
+        <br/>
+        <div className="detrating">
         <label htmlFor="">Rating:</label>
+        <br/>
+        <br/>
         <input
           type="number"
           step="0.1"
@@ -166,24 +207,40 @@ function Addvideogame() {
           <label>{errors.rating}</label>
         )}
         </div>
+        <br/>
+        <div className="detplatforms">
+       
+        <label className="selectores">Platforms:
+        <br/><br/>
+                        
+                        <select className="selectors" multiple name="platforms" onChange={(e) => handleSelectionP(e)} required>
+                            <option value="Wii">WII</option>
+                            <option value="PS5">PS5</option>
+                            <option value="PS4">PS4</option>
+                            <option value="PS3">PS3</option>
+                            <option value="Xbox S/X">Xbox S/X</option>
+                            <option value="Xbox One">Xbox One</option>
+                            <option value="Xbox 360">Xbox 360</option>
+                            <option value="Nintendo">Nintendo</option>
+                            <option value="PC">PC</option>
+                        </select>
 
-        <div>
-        <label htmlFor="">Platforms*:</label>
-        <Select
-          isMulti
-          options={storedPlatforms.map((el, i) => {
-            return { value: el.name, label: el.name, id: el.id };
-          })}
-          onChange={platformsHandler}
-          closeMenuOnSelect={false}
-        />
+                    </label>
+
+
+
+
+
         {activeError.platforms&&(
           <label>{errors.platforms}</label>
         )}
+    
         </div>
-
-        <div>
+        <br/>
+        <div className="detimage">
+        
         <label htmlFor="">Image:</label>
+        <br/>    <br/>
         <input
           type="text"
           name="background_image"
@@ -192,9 +249,10 @@ function Addvideogame() {
           placeholder="Image url"
         ></input>
         </div>
-
-        <div>
+        <br/>    <br/>
+        <div className="detgenres">
         <label htmlFor="">Genres:</label>
+        <br/>    <br/>
         <div>
           {storedGenres && storedGenres.length > 0 ? (
             storedGenres.map((el, i) => {
@@ -219,13 +277,59 @@ function Addvideogame() {
           )}
         </div>
         </div>
+        <br/>    <br/>
 
-        <div>
-        <input type={!errors.platforms&&!errors.name&&!errors.description?"submit":"button"} onClick={handleErrorClick} value="Save"></input>
+        <div className="detsubmit"> 
+        <input type={!errors.platforms&&!errors.name&&!errors.description?"submit":"button"} onClick={handleErrorClick} value="Submit videogame" className="butn"></input>
         </div>
+        
+        <br/>
+        <div className="detplatformsselected">
+                <h4>platforms selected:</h4>
+                </div>
+                <div className='selectedThings'>
+                    {
+                    videogame.platforms.map((el,i) =>
+                        <div>
+                            <p key={i}>{el} <button onClick={(e)=> handleDeletePlat(el)} >X</button></p>
+                            
+                        </div>
+                    )
+                    }
+          </div>
+
       </form>
-    </>
+    </div>
+    </div>
   );
 }
 
 export default Addvideogame;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*         <Select
+          isMulti
+          options={storedPlatforms.map((el, i) => {
+            return { value: el.name, label: el.name, id: el.id };
+          })}
+          onChange={platformsHandler}
+          closeMenuOnSelect={false}
+        /> */

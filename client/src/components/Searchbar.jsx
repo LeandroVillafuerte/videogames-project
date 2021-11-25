@@ -22,7 +22,7 @@ function Searchbar() {
         <div>
             <form onSubmit= {onSubmit}>
                 <input id="inpsearch" type="text" onChange={onInputChange} value={search} placeholder="Search by name..."/>
-                <input className="nav" type="submit" value="Search" />
+                <input className="navbutton" type="submit" value="Search" />
             </form>
         </div>
     )

@@ -13,13 +13,14 @@ function CreatedByUser() {
         dispatch(videogameOrigin(e.target.value))
     }
     return (
-        <div>
+        <div className="selectfilters">
+            <h4>Sort by origin</h4>
             <select name="GameOrigin" onChange={onSelectChange}>
             <option name="--Select one--" disabled selected>--Select one--</option>
             <option value={SEEALL}>See all</option>
             <option value={CREATEDBYUSER}>Created by user</option>
             <option value={FROMLIBRARY}>From library</option>
-      </select>
+         </select>
         </div>
     )
 }

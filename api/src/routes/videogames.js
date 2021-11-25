@@ -1,4 +1,4 @@
-const { Videogame, Genre, Platform } = require("../db");
+const { Videogame, Genre } = require("../db");
 const { Op } = require("sequelize");
 const axios = require("axios").default;
 const router = require("express").Router();
@@ -26,10 +26,9 @@ function responseObject(resp) {
     id: resp.id,
     name: resp.name,
     platforms: resp.platforms.map((element) => {
-      return{
-        id:element.platform.id,
-        name: element.platform.name,
-      }}),
+      return element.platform.name
+        /* id:element.platform.id, */
+      }),
     release_date: resp.released,
     background_image: resp.background_image,
     rating: resp.rating,
@@ -51,7 +50,7 @@ router.get("/", async function (req, res,next) {
 
       const options = {
         where: { name: { [Op.iLike]: `%${name}%` } },
-        include: [{ model: Genre },{model: Platform}]
+        include: [{ model: Genre }]
       };
   
       let info = await videogamesFinder(options);
@@ -74,7 +73,7 @@ router.get("/", async function (req, res,next) {
         .catch(next);
     } else {
       let info = []
-      info = await videogamesFinder({include:[{ model: Genre },{model: Platform}]})
+      info = await videogamesFinder({include:[{ model: Genre }]})
 
       Promise.all([axios.get(`https://api.rawg.io/api/games?key=${API_KEY}`),
       axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=2`),

@@ -87,8 +87,10 @@
     width: 100%;
     z-index: 99;
     
+    
 
 }
+
 .actions{
     display: flex;
     align-self: flex-end;
@@ -100,7 +102,7 @@
 }
 
 
-.nav{
+.navbutton{
     background: seagreen;
     padding: 5px;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
@@ -119,5 +121,11 @@
 #title{
     font-family: "videogamefont";
     font-size:20px;
+    text-decoration: none;
+    color:white;
 }
   
+
+.selectfilters{
+    padding:15px
+}
