@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/Pagination.css"
+import "./styles/Pagination.css";
 
 function Pagination({
   currentPage,
@@ -15,7 +15,7 @@ function Pagination({
   return (
     <>
       <ul className="pageNumbers">
-      <span id="selectPage">Select page:          </span>
+        <span id="selectPage">Select page:</span>
         {pages.map((number) => {
           return (
             <li

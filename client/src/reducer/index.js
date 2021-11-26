@@ -4,6 +4,7 @@ import {
   FILTERBYGENRE,
   SEARCH_VIDEOGAMES,
   SORT,
+  SORTDDATE,
   SORTRATING,
   VIDEOGAMEORIGIN,
 } from "../constants/actionstypes";
@@ -133,6 +134,23 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         sortedvideogames: orderedrating,
+      };
+
+      case SORTDDATE:
+      let ordereddate = [...state.sortedvideogames];
+      ordereddate.sort((a, b) => {
+        if (a.release_date < b.release_date) {
+          return action.payload === ASCENDENTE ? -1 : 1;
+        }
+        if (a.release_date > b.release_date) {
+          return action.payload === ASCENDENTE ? 1 : -1;
+        }
+        // a debe ser igual b
+        return 0;
+      });
+      return {
+        ...state,
+        sortedvideogames: ordereddate,
       };
 
     default:

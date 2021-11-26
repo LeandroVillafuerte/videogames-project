@@ -23,7 +23,7 @@
     padding-right: 5px;
     position: center;
     position: relative;
-    top:40vh;
+    top:15vh;
     align-items: center;
     justify-content: center;
 }
@@ -36,4 +36,13 @@
 .infoPI{
     text-align: left;
 
+}
+
+.henrylives{
+    display: flex;
+    margin-top: 20vh;
+    font-size: 30px;
+    font-family: videogamefont;
+    flex-direction: row;
+    justify-content: center;
 }

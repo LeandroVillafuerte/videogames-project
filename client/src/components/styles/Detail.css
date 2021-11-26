@@ -18,7 +18,7 @@
 h3{
     margin-top: 10px;
 }
-.Card{
+.Carddetail{
     position: absolute;
     height: 1000px;
     width: 80%;
@@ -28,9 +28,27 @@ h3{
     padding-bottom: 5vh;
 }
 
-.Card img{
+.Carddetail img{
     height: 60vh;
     object-fit: cover;
+    max-width: 1000px;
+    
+}
+
+.Loaderdetail{
+    display: flex;
+    align-items: center;
+    height: 80vh;
+    object-fit: cover;
+    /* max-width: 1000px; */
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.Loaderdetail img{
+    max-width: none;
+    height: 40vh;
 }
 
 #detailtitle{

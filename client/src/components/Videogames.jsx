@@ -11,6 +11,7 @@ import CreatedByUser from "./CreatedByUser";
 import Sortvideogames from "./Sortvideogames";
 import FilterGenre from "./FilterGenre";
 import "./styles/Home.css";
+import Sortbydate from "./Sortbydate.jsx"
 
 function Videogames() {
   let dispatch = useDispatch();
@@ -58,6 +59,8 @@ function Videogames() {
           <SortRating />
           <CreatedByUser />
           <Sortvideogames />
+          <Sortbydate/>
+          
         </div>
 
         

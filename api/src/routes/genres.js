@@ -7,7 +7,7 @@ const axios = require("axios").default;
 //  https://api.rawg.io/api/genres
 
 ///////////////////////////////////////Routes/////////////////////////////////////////////////
-router.get("/", async function (req, res) {
+router.get("/", async function (req, res,next) {
   axios
     .get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
     .then((response) => {
@@ -31,7 +31,7 @@ router.get("/", async function (req, res) {
     .then((response) => {
       res.json(response);
     })
-    .catch((e) => {console.log(e);res.status(500).send("Error")});
+    .catch((next));
 });
 
 module.exports = router;

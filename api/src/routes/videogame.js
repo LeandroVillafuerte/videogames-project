@@ -23,7 +23,7 @@ function responseObject(resp) {
 }
 /////////////////////////////////////Routes///////////////////////////////////////////////////
 
-router.get("/:id", async function (req, res) {
+router.get("/:id", async function (req, res,next) {
   const { id } = req.params;
 
   try {
@@ -38,16 +38,16 @@ router.get("/:id", async function (req, res) {
           let game = responseObject(resp)
           res.status(200).send(game);
         })
-        .catch(() => res.status(404).send("Game not found"));
+        .catch(next);
     } else {
       res.status(200).send(videogameElement);
     }
   } catch (e) {
-    res.status(500).send("Internal error");
+    next(e)
   }
 });
 
-router.post("/", async function (req, res) {
+router.post("/", async function (req, res,next) {
   const {
     name,
     description,
@@ -57,7 +57,7 @@ router.post("/", async function (req, res) {
     background_image,
     genres,
   } = req.body;
-
+  try{
   const videogame = await Videogame.create({
     name,
     description,
@@ -70,6 +70,8 @@ router.post("/", async function (req, res) {
   await videogame.addGenres(genres);
   // await videogame.addPlatforms(platforms)
   res.status(201).send("Game successfully created");
+  }
+  catch(e){next(e)}
 });
 
 module.exports = router;

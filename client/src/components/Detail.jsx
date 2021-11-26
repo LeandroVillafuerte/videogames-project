@@ -22,7 +22,7 @@ function Detail() {
             <div id="detailtitle">
                 <h1>Videogame detail</h1>
             </div>
-            <div className="Card">
+            <div className="Carddetail">
             {
                 videogame?
                 <>
@@ -35,6 +35,10 @@ function Detail() {
                 </p>
                 </div>
                 <div>
+                <h3>Release date</h3>
+                <p>{videogame&&videogame.release_date}</p>
+                </div>
+                <div>
                 <h3>Rating</h3>
                 <p>{videogame&&videogame.rating}</p>
                 </div>
@@ -42,16 +46,16 @@ function Detail() {
                 <h3>Platforms</h3>
                 <p>{videogame&&videogame.platforms?.map((el,i)=>{
                     return(
-                        <span>{el}  </span>
+                        <span key={i}>{el}  </span>
                     )
                 })}</p>
-                <h3>Website</h3>
-                <p>{videogame&&videogame.website}</p>
+                <h3>{videogame&&videogame.website?"Website":""}</h3>
+                <a href={videogame&&videogame.website} target="_blank" rel="noreferrer">{videogame&&videogame.website}</a>
 
                 </div>
                 
                 </>:
-                <div style={{width: "100vh",display:"flex",justifyContent:"center"}} ><Loader /></div>
+                <div className="Loaderdetail" ><Loader /></div>
             }
             </div>
         </div>
