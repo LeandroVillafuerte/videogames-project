@@ -16,8 +16,10 @@ jobs:
           node-version: '14.17.3'
       - run: npm ci 
         working-directory: ./client
+        entryPoint: ./client
       - run: npm run build
         working-directory: ./client
+        entryPoint: ./client
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
