@@ -1,12 +1,13 @@
 import axios from "axios";
 import  { FETCH_GENRES, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT, SORTDDATE, SORTRATING, VIDEOGAMEORIGIN } from "../constants/actionstypes.js"
-  
+
+const {REACT_APP_API} = process.env
 
 
 export const fetchVideogames = (payload) => {
   return function (dispatch) {
     axios
-      .get("http://localhost:3001/videogames")
+      .get(`${REACT_APP_API}/videogames`)
       .then((videogames) => {
         dispatch({ type: FETCH_VIDEOGAMES, payload: videogames.data });
       })
@@ -19,7 +20,7 @@ export const fetchVideogames = (payload) => {
 export const searchVideogames = (search) => {
   return function (dispatch) {
     axios
-      .get(`http://localhost:3001/videogames?name=${search}`)
+      .get(`${REACT_APP_API}/videogames?name=${search}`)
       .then((videogames) => {
         dispatch({ type: SEARCH_VIDEOGAMES, payload: videogames.data });
       })
@@ -32,7 +33,7 @@ export const searchVideogames = (search) => {
 export const fetchGenres = (payload) => {
   return function (dispatch) {
     axios
-      .get("http://localhost:3001/genres")
+      .get(`${REACT_APP_API}/genres`)
       .then((genres) => {
         dispatch({ type: FETCH_GENRES, payload:genres.data });
       })
@@ -45,7 +46,7 @@ export const fetchGenres = (payload) => {
 // export const fetchPlatforms = (payload) => {
 //   return function (dispatch) {
 //     axios
-//       .get("http://localhost:3001/platforms")
+//       .get("${REACT_APP_API}/platforms")
 //       .then((platforms) => {
 //         dispatch({ type: FETCH_PLATFORMS, payload:platforms.data });
 //       })
