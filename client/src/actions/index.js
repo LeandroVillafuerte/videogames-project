@@ -3,7 +3,6 @@ import  { FETCH_GENRES, FETCH_VIDEOGAMES, FILTERBYGENRE, SEARCH_VIDEOGAMES, SORT
 
 const {REACT_APP_API} = process.env
 
-//test
 export const fetchVideogames = (payload) => {
   return function (dispatch) {
     axios
