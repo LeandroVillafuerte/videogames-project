@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { fetchGenres } from "../actions";
 import "./styles/Addvideogame.css";
 
+const {REACT_APP_API} = process.env
+
 function Addvideogame() {
   let storedGenres = useSelector((store) => store.genres);
   // let storedPlatforms = useSelector((store) => store.platforms);
@@ -123,7 +125,7 @@ function Addvideogame() {
   function onSubmit(e) {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/videogame", videogame)
+      .post(`${REACT_APP_API}/videogame`, videogame)
       .then(() => history.push("/home"))
       .catch((e) => console.log(e));
   }

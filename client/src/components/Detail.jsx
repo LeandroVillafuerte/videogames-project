@@ -5,12 +5,14 @@ import { Link } from 'react-router-dom';
 import "./styles/Detail.css"
 import Loader from "./Loader.jsx"
 
+const {REACT_APP_API} = process.env
+
 
 function Detail() {
     const [videogame, setVideogame] = useState(null)
     let {id} = useParams()
     useEffect(() => {
-        axios.get('http://localhost:3001/videogame/'+id)
+        axios.get(REACT_APP_API+'/videogame/'+id)
         .then(response => setVideogame(response.data))
 
         return () => setVideogame(null)
