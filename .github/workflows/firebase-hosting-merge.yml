@@ -19,6 +19,7 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         env:
             REACT_APP_API: ${{secrets.REACT_APP_API}}
+            FIREBASE_PROJECT_PATH: client
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: >-
