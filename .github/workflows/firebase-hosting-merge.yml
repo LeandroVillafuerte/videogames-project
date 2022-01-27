@@ -6,12 +6,12 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - master
+defaults:
+      run:
+        working-directory: ./client
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./client
     steps:
       - uses: actions/checkout@v2
       - run: npm ci && npm run build
