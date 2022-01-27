@@ -20,4 +20,5 @@ jobs:
             ${{ secrets.FIREBASE_SERVICE_ACCOUNT_LEANDROVILLAFUERTE_VIDEOGAMES
             }}
           projectId: leandrovillafuerte-videogames
+          path: ./client
           entryPoint: ./client

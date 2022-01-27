@@ -26,4 +26,5 @@ jobs:
             }}
           channelId: live
           projectId: leandrovillafuerte-videogames
+          path: ./client
           entryPoint: ./client
