@@ -75,6 +75,7 @@ function Videogames() {
                   name={videogame.name}
                   img={videogame.background_image}
                   rating={videogame.rating}
+                  release_date= {videogame.release_date}
                 />
               );
             })

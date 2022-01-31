@@ -20,6 +20,10 @@ function Videogame(props) {
                     })}
                 </div>
                 <div>
+                <h4>Release date</h4>
+                <h3>{props.release_date}</h3>                
+                </div>
+                <div>
                 <h4>Rating</h4>
                 <h3>{props.rating}</h3>                
                 </div>
